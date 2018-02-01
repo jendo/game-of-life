@@ -1,0 +1,7 @@
+parameters:
+    logFile: %baseDir%/logs/log.txt
+
+services:
+    application: GameOfLife\Application
+    - GameOfLife\SingleCommand
+    - Symfony\Component\Console\Application
