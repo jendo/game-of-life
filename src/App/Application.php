@@ -5,8 +5,6 @@ use Symfony\Component\Console\Application as ConsoleApplication;
 
 class Application
 {
-    const IS_SINGLE_COMMAND_APPLICATION = true;
-
     /**
      * @var Application
      */
