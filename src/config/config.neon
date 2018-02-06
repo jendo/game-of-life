@@ -4,4 +4,7 @@ parameters:
 services:
     application: GameOfLife\Application
     - GameOfLife\SingleCommand
+    - GameOfLife\Input\XmlFileReaderFactory
+    - GameOfLife\Output\OutputStyleFactory
     - Symfony\Component\Console\Application
+    - Sabre\Xml\Service
