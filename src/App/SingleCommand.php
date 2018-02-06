@@ -65,10 +65,18 @@ class SingleCommand extends Command
         $xmlFileReader = $this->xmlFileReaderFactoryory->create($inputXmlFilePath);
 
         try {
-            $data = $xmlFileReader->getData();
+            $worldState = $xmlFileReader->getInitialWorldState();
         } catch (InvalidInputException $e) {
             $this->symfonyStyle->error($e->getMessage());
+            exit;
         }
+
+        $rows = [];
+        foreach ($worldState->getCells() as $cell) {
+                $rows[$cell->getPosY()][$cell->getPosX()] = $cell->getSpecies();
+        }
+
+        $this->symfonyStyle->table([], array_reverse($rows));
     }
 
 }

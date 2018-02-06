@@ -1,10 +1,12 @@
 <?php
 namespace GameOfLife\Input;
 
-use GameOfLife\Environment\Life;
-use GameOfLife\Environment\Organism;
-use GameOfLife\Environment\Organisms;
-use GameOfLife\Environment\World;
+use GameOfLife\Environment\WorldState;
+use GameOfLife\Environment\WorldStateFactory;
+use GameOfLife\Input\Mapping\Life;
+use GameOfLife\Input\Mapping\Organism;
+use GameOfLife\Input\Mapping\Organisms;
+use GameOfLife\Input\Mapping\World;
 use GameOfLife\Exceptions\InvalidInputException;
 use Sabre\Xml\ParseException;
 use Sabre\Xml\Service;
@@ -23,25 +25,33 @@ class XmlFileReader
     private $xmlService;
 
     /**
+     * @var WorldStateFactory
+     */
+    private $worldStateFactory;
+
+    /**
      * @param string $filePath
      * @param Service $xmlService
      */
-    public function __construct(string $filePath, Service $xmlService)
+    public function __construct(string $filePath, Service $xmlService, WorldStateFactory $worldStateFactory)
     {
         $this->xmlService = $xmlService;
         $this->filePath = $filePath;
+        $this->worldStateFactory = $worldStateFactory;
     }
 
     /**
+     * @return WorldState
      * @throws InvalidInputException
      */
-    public function getData()
+    public function getInitialWorldState() : WorldState
     {
         $input = $this->loadFile();
         $life = $this->parseXmlDocument($input);
         $this->validaXmlData($life);
+        $worldState = $this->worldStateFactory->create($life);
 
-        return $life;
+        return $worldState;
     }
 
     /*

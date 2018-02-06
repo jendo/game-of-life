@@ -1,6 +1,5 @@
 <?php
-
-namespace GameOfLife\Environment;
+namespace GameOfLife\Input\Mapping;
 
 class Organism
 {
@@ -15,7 +14,7 @@ class Organism
     public $y_pos;
 
     /**
-     * @var int
+     * @var string
      */
     public $species;
 }

@@ -6,5 +6,6 @@ services:
     - GameOfLife\SingleCommand
     - GameOfLife\Input\XmlFileReaderFactory
     - GameOfLife\Output\OutputStyleFactory
+    - GameOfLife\Environment\WorldStateFactory
     - Symfony\Component\Console\Application
     - Sabre\Xml\Service

@@ -1,6 +1,5 @@
 <?php
-
-namespace GameOfLife\Environment;
+namespace GameOfLife\Input\Mapping;
 
 class World
 {
