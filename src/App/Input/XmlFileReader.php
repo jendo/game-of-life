@@ -1,6 +1,7 @@
 <?php
 namespace GameOfLife\Input;
 
+use GameOfLife\Environment\Cell;
 use GameOfLife\Environment\WorldState;
 use GameOfLife\Environment\WorldStateFactory;
 use GameOfLife\Input\Mapping\Life;
@@ -25,19 +26,13 @@ class XmlFileReader
     private $xmlService;
 
     /**
-     * @var WorldStateFactory
-     */
-    private $worldStateFactory;
-
-    /**
      * @param string $filePath
      * @param Service $xmlService
      */
-    public function __construct(string $filePath, Service $xmlService, WorldStateFactory $worldStateFactory)
+    public function __construct(string $filePath, Service $xmlService)
     {
         $this->xmlService = $xmlService;
         $this->filePath = $filePath;
-        $this->worldStateFactory = $worldStateFactory;
     }
 
     /**
@@ -49,7 +44,7 @@ class XmlFileReader
         $input = $this->loadFile();
         $life = $this->parseXmlDocument($input);
         $this->validaXmlData($life);
-        $worldState = $this->worldStateFactory->create($life);
+        $worldState = $this->createCellsFromXmlObject($life);
 
         return $worldState;
     }
@@ -90,8 +85,6 @@ class XmlFileReader
      */
     private function parseXmlDocument(string $input) : Life
     {
-        $life = new Life();
-
         $this->mapXmlElements();
 
         try {
@@ -160,5 +153,38 @@ class XmlFileReader
                 throw new InvalidInputException("Missing element 'species' in some of parent element 'organism'");
             }
         }
+    }
+
+    /**
+     * @param Life $life
+     * @return WorldState
+     */
+    private function createCellsFromXmlObject(Life $life): WorldState
+    {
+
+        $livingCellsSpecies = [];
+        foreach ($life->organisms->organism as $organism) {
+            $livingCellsSpecies[$organism->x_pos][$organism->y_pos] = $organism->species;
+        }
+
+        $cells = [];
+        $livingCells = [];
+        for ($x = 0; $x < $life->world->cells; $x++) {
+            for ($y = 0; $y < $life->world->cells; $y++) {
+                $species = isset($livingCellsSpecies[$x][$y]) ? $livingCellsSpecies[$x][$y] : null;
+                $cell = new Cell($x, $y, $species);
+
+                $cells[$x][$y] = $cell;
+                if ($cell->isAlive()) {
+                    $livingCells[] = $cell;
+                }
+            }
+        }
+
+        return new WorldState(
+            $life->world->iterations,
+            $life->world->cells,
+            $cells
+        );
     }
 }

@@ -1,7 +1,6 @@
 <?php
 namespace GameOfLife\Input;
 
-use GameOfLife\Environment\WorldStateFactory;
 use Sabre\Xml\Service;
 
 class XmlFileReaderFactory
@@ -12,21 +11,19 @@ class XmlFileReaderFactory
     private $xmlService;
 
     /**
-     * @var WorldStateFactory
-     */
-    private $worldStateFactory;
-
-    /**
      * @param Service $xmlService
      */
-    public function __construct(Service $xmlService, WorldStateFactory $worldStateFactory)
+    public function __construct(Service $xmlService)
     {
         $this->xmlService = $xmlService;
-        $this->worldStateFactory = $worldStateFactory;
     }
 
+    /**
+     * @param string $xmlFilePath
+     * @return XmlFileReader
+     */
     public function create(string $xmlFilePath) : XmlFileReader
     {
-        return new XmlFileReader($xmlFilePath, $this->xmlService, $this->worldStateFactory);
+        return new XmlFileReader($xmlFilePath, $this->xmlService);
     }
 }

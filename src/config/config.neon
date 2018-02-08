@@ -3,9 +3,11 @@ parameters:
 
 services:
     application: GameOfLife\Application
-    - GameOfLife\SingleCommand
+    - GameOfLife\Command\RunCommand
     - GameOfLife\Input\XmlFileReaderFactory
     - GameOfLife\Output\OutputStyleFactory
-    - GameOfLife\Environment\WorldStateFactory
+    - GameOfLife\Helper\WorldFormatter
+    - GameOfLife\Environment\NeighboursFactory
+    - GameOfLife\Environment\WorldFactory
     - Symfony\Component\Console\Application
     - Sabre\Xml\Service

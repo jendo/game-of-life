@@ -1,6 +1,7 @@
 <?php
 namespace GameOfLife;
 
+use GameOfLife\Command\RunCommand;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
 class Application
@@ -11,16 +12,15 @@ class Application
     private $symfonyConsoleApplication;
 
     /**
-     * @var SingleCommand
+     * @var RunCommand
      */
     private $command;
 
     /**
-     * ConsoleApplication constructor.
      * @param ConsoleApplication $consoleApplication
-     * @param SingleCommand $command
+     * @param RunCommand $command
      */
-    public function __construct(ConsoleApplication $consoleApplication, SingleCommand $command)
+    public function __construct(ConsoleApplication $consoleApplication, RunCommand $command)
     {
         $this->symfonyConsoleApplication = $consoleApplication;
         $this->command = $command;

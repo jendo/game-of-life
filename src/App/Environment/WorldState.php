@@ -5,23 +5,39 @@ namespace GameOfLife\Environment;
 class WorldState
 {
     /**
-     * @var Cell
+     * @var Cell[]
      */
     private $cells;
 
     /**
      * @var int
      */
-    private $width;
+    private $iterations;
 
     /**
-     * @param Cell[] $cells
-     * @param int $width
+     * @var int
      */
-    public function __construct(array $cells, int $width)
+    private $size;
+
+
+    /**
+     * @param int $iterations
+     * @param int $size
+     * @param Cell[] $cells
+     */
+    public function __construct(int $iterations, int $size, array $cells)
     {
         $this->cells = $cells;
-        $this->width = $width;
+        $this->iterations = $iterations;
+        $this->size = $size;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIterations()
+    {
+        return $this->iterations;
     }
 
     /**
@@ -35,17 +51,9 @@ class WorldState
     /**
      * @return int
      */
-    public function getWidth()
+    public function getSize()
     {
-        return $this->width;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHeight()
-    {
-        return $this->width;
+        return $this->size;
     }
 
 
