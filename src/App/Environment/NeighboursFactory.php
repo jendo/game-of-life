@@ -6,9 +6,9 @@ class NeighboursFactory
     /**
      * @param Cell $cell
      * @param WorldState $worldState
-     * @return Neighbours
+     * @return CellNeighbours
      */
-    public function createNeighbours(Cell $cell, WorldState $worldState): Neighbours
+    public function createNeighbours(Cell $cell, WorldState $worldState): CellNeighbours
     {
         $worldSize = $worldState->getSize();
         $cells = $worldState->getCells();
@@ -28,6 +28,6 @@ class NeighboursFactory
             }
         }
 
-        return new Neighbours($neighbours);
+        return new CellNeighbours($neighbours);
     }
 }

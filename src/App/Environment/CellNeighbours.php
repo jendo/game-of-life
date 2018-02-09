@@ -1,7 +1,7 @@
 <?php
 namespace GameOfLife\Environment;
 
-class Neighbours
+class CellNeighbours
 {
     const NUMBER_OF_NEIGHBOURS_OF_SAME_SPECIES_NEEDED_FOR_RISE = 3;
 

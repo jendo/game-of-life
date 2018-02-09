@@ -101,6 +101,8 @@ class RunCommand extends Command
             $world = $this->worldFactory->create($worldState);
             $worldState = $world->evolve();
         }
+
+
     }
 
     /**

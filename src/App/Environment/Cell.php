@@ -63,10 +63,10 @@ class Cell
     }
 
     /**
-     * @param Neighbours $neighbours
+     * @param CellNeighbours $neighbours
      * @return Cell
      */
-    public function evolve(Neighbours $neighbours): Cell
+    public function evolve(CellNeighbours $neighbours): Cell
     {
         $state = $this->getNewState($neighbours);
 
@@ -86,10 +86,10 @@ class Cell
     }
 
     /**
-     * @param Neighbours $neighbours
+     * @param CellNeighbours $neighbours
      * @return CellState
      */
-    private function getNewState(Neighbours $neighbours): CellState
+    private function getNewState(CellNeighbours $neighbours): CellState
     {
         if ($this->isAlive()) {
             $countNeighboursOfSameSpecies = $neighbours->getSpeciesCount($this->getSpecies());
