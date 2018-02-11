@@ -4,7 +4,7 @@ PHP implementation of [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Ga
 
 This implementation is able to work with more than one speices of organism.
 
-Application read initial word state from xml file defined as 1st parameter in run commnad of application. After iterations, the state of the world will be saved in an XML file defined as 2nd parameter in run commnad of application.
+Application read initial word state from XML file defined as 1st parameter in run commnad. After iterations, the state of the world will be saved in an XML file defined as 2nd parameter in run commnad of application.
 
 ## How to run application
 
@@ -21,7 +21,7 @@ Second parameter is optional, default values is ```output.xml```
 
 ## Sample input
 ```xml
-<?xml version="1.0" encoding="UTF­8"?> ?>
+<?xml version="1.0" encoding="UTF­8"?>
 <life>
     <world>
         <cells>4</cells> <!-- Dimension of the square "world" -->
