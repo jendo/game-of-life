@@ -1,40 +1,57 @@
-# Game Of Life
+# Game of Life
 
-Consider a representation of a _world_ as an `n` by `n` matrix. Each element in the matrix may contain 1 organism.
-Each organism lives, dies and reproduces according to the following set of rules:
+PHP implementation of [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
 
-* If there are two or three organisms of the same type living in the elements surrounding an organism of the same,
-type then it may survive.
+This implementation is able to work with more than one speices of organism.
 
-* If there are less than two organisms of one type surrounding one of the same type then it will die due to isolation.
+Application read initial word state from xml file defined as 1st parameter in run commnad of application. After iterations, the state of the world will be saved in an XML file defined as 2nd parameter in run commnad of application.
 
-* If there are four or more organisms of one type surrounding one of the same type then it will die due to overcrowding.
+## How to run application
 
-* If there are exactly three organisms of one type surrounding one element, they may give birth into that cell.
-The new organism is the same type as its parents. If this condition is true for more then one
-species on the same element then species type for the new element is chosen randomly.
+Clone the repo and install dependencies via composer: ```composer install```  
 
-* If two organisms occupy one element, one of them must die (chosen randomly) (only to resolve initial conflicts).
+In console run this commnad:
 
-The _world_ and initial distribution of organisms within it is defined by an XML file of the following format:
+```
+php index.php game:run <input.xml> <output.xml>
+```
 
+First parameter is required.
+Second parameter is optional, default values is ```output.xml```
+
+## Sample input
 ```xml
-<?xml version="1.0" encoding="UTF­8"?>
+<?xml version="1.0" encoding="UTF­8"?> ?>
 <life>
     <world>
-        <cells>n</cells> <!-- Dimension of the square "world" -->
-        <species>m</species> <!-- Number of distinct species -->
-        <iterations>4000000</iterations> <!-- Number of iterations to be calculated -->
+        <cells>4</cells> <!-- Dimension of the square "world" -->
+        <species>1</species> <!-- Number of distinct species -->
+        <iterations>10</iterations> <!-- Number of iterations to be calculated -->
     </world>
     <organisms>
         <organism>
-            <x_pos>x</x_pos> <!-- x position -->
-            <y_pos>y</y_pos> <!-- y position -->
-            <species>t</species> <!-- Species type -->
+            <x_pos>1</x_pos> <!-- x position -->
+            <y_pos>2</y_pos> <!-- y position -->
+            <species>X</species> <!-- Species type -->
+        </organism>
+        <organism>
+            <x_pos>2</x_pos>
+            <y_pos>2</y_pos>
+            <species>X</species>
+        </organism>
+        <organism>
+            <x_pos>3</x_pos>
+            <y_pos>2</y_pos>
+            <species>X</species>
         </organism>
     </organisms>
 </life>
 ```
 
-After iterations, the state of the _world_ is to be saved in an XML file, `out.xml`,
-of the same format as the initial definition file.
+## How to run tests
+
+Tests are written in [PHPUNIT package from Sebastian Bergmann](https://packagist.org/packages/phpunit/phpunit)
+
+```
+./vendor/bin/phpunit -c tests 
+```
