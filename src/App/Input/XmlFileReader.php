@@ -39,12 +39,12 @@ class XmlFileReader
      * @return WorldState
      * @throws InvalidInputException
      */
-    public function getInitialWorldState() : WorldState
+    public function createInitialWorldState(): WorldState
     {
         $input = $this->loadFile();
         $life = $this->parseXmlDocument($input);
         $this->validaXmlData($life);
-        $worldState = $this->createCellsFromXmlObject($life);
+        $worldState = $this->createWordStateFromXmlObject($life);
 
         return $worldState;
     }
@@ -52,7 +52,7 @@ class XmlFileReader
     /*
      * @return string
      */
-    private function loadFile() : string
+    private function loadFile(): string
     {
         if (!file_exists($this->filePath)) {
             throw new InvalidInputException(sprintf("The file '%s' does not exist.", $this->filePath));
@@ -83,7 +83,7 @@ class XmlFileReader
      * @return Life
      * @throws InvalidInputException
      */
-    private function parseXmlDocument(string $input) : Life
+    private function parseXmlDocument(string $input): Life
     {
         $this->mapXmlElements();
 
@@ -159,7 +159,7 @@ class XmlFileReader
      * @param Life $life
      * @return WorldState
      */
-    private function createCellsFromXmlObject(Life $life): WorldState
+    private function createWordStateFromXmlObject(Life $life): WorldState
     {
 
         $livingCellsSpecies = [];
@@ -184,6 +184,7 @@ class XmlFileReader
         return new WorldState(
             $life->world->iterations,
             $life->world->cells,
+            $life->world->species,
             $cells
         );
     }

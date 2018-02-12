@@ -5,6 +5,7 @@ services:
     application: GameOfLife\Application
     - GameOfLife\Command\RunCommand
     - GameOfLife\Input\XmlFileReaderFactory
+    - GameOfLife\Output\XmlFileWriterFactory
     - GameOfLife\Output\OutputStyleFactory
     - GameOfLife\Helper\WorldFormatter
     - GameOfLife\Environment\NeighboursFactory

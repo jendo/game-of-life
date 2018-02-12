@@ -1,12 +1,13 @@
 <?php
 namespace GameOfLife\Command;
 
-use GameOfLife\Environment\World;
 use GameOfLife\Environment\WorldFactory;
 use GameOfLife\Exceptions\InvalidInputException;
+use GameOfLife\Exceptions\InvalidOutputException;
 use GameOfLife\Helper\WorldFormatter;
 use GameOfLife\Input\XmlFileReaderFactory;
 use GameOfLife\Output\OutputStyleFactory;
+use GameOfLife\Output\XmlFileWriterFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,6 +19,7 @@ class RunCommand extends Command
     const CYCLES_PER_SECOND = 1;
     const COMMAND_NAME = 'game:run';
     const INPUT_COMMAND_ARGUMENT = 'i';
+    const OUTPUT_COMMAND_ARGUMENT = 'o';
 
     /**
      * @var OutputStyleFactory
@@ -45,14 +47,21 @@ class RunCommand extends Command
     private $worldFactory;
 
     /**
+     * @var XmlFileWriterFactory
+     */
+    private $xmlFileWriterFactory;
+
+    /**
      * @param OutputStyleFactory $outputStyleFactory
      * @param XmlFileReaderFactory $xmlFileReaderFactory
+     * @param XmlFileWriterFactory $xmlFileWriterFactory
      * @param WorldFormatter $worldFormatter
      * @param WorldFactory $worldFactory
      */
     public function __construct(
         OutputStyleFactory $outputStyleFactory,
         XmlFileReaderFactory $xmlFileReaderFactory,
+        XmlFileWriterFactory $xmlFileWriterFactory,
         WorldFormatter $worldFormatter,
         WorldFactory $worldFactory
     ) {
@@ -61,13 +70,15 @@ class RunCommand extends Command
         $this->xmlFileReaderFactory = $xmlFileReaderFactory;
         $this->worldFormatter = $worldFormatter;
         $this->worldFactory = $worldFactory;
+        $this->xmlFileWriterFactory = $xmlFileWriterFactory;
     }
 
 
     protected function configure()
     {
         $this->setName(self::COMMAND_NAME);
-        $this->addArgument(self::INPUT_COMMAND_ARGUMENT, InputArgument::OPTIONAL, 'Input XML file', 'input.xml');
+        $this->addArgument(self::INPUT_COMMAND_ARGUMENT, InputArgument::REQUIRED, 'Input XML file');
+        $this->addArgument(self::OUTPUT_COMMAND_ARGUMENT, InputArgument::OPTIONAL, 'Output XML file', 'output.xml');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
@@ -81,11 +92,11 @@ class RunCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $inputXmlFilePath = $input->getArgument(self::INPUT_COMMAND_ARGUMENT);
-        $xmlFileReader = $this->xmlFileReaderFactory->create($inputXmlFilePath);
+        $inputXmlFilePathToRead = $input->getArgument(self::INPUT_COMMAND_ARGUMENT);
+        $xmlFileReader = $this->xmlFileReaderFactory->create($inputXmlFilePathToRead);
 
         try {
-            $worldState = $xmlFileReader->getInitialWorldState();
+            $worldState = $xmlFileReader->createInitialWorldState();
         } catch (InvalidInputException $e) {
             $this->symfonyStyle->error($e->getMessage());
             exit;
@@ -102,7 +113,15 @@ class RunCommand extends Command
             $worldState = $world->evolve();
         }
 
+        $inputXmlFilePathToWrite = $input->getArgument(self::OUTPUT_COMMAND_ARGUMENT);
+        $xmlFileWriter = $this->xmlFileWriterFactory->create($inputXmlFilePathToWrite);
 
+        try {
+            $xmlFileWriter->saveWorldState($worldState);
+        } catch (InvalidOutputException $e) {
+            $this->symfonyStyle->error($e->getMessage());
+            exit;
+        }
     }
 
     /**

@@ -41,7 +41,7 @@ class World
             }
         }
 
-        return new WorldState($this->worldState->getIterations(), $wordSize, $newGeneration);
+        return $this->worldState->getNewStateWithNewGeneration($newGeneration);
     }
 
 }
