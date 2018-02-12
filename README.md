@@ -53,5 +53,5 @@ Second parameter is optional, default values is ```output.xml```
 Tests are written in [PHPUNIT package from Sebastian Bergmann](https://packagist.org/packages/phpunit/phpunit)
 
 ```
-./vendor/bin/phpunit -c tests 
+./vendor/bin/phpunit -c phpunit.xml 
 ```
