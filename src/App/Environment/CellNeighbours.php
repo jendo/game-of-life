@@ -26,6 +26,14 @@ class CellNeighbours
     }
 
     /**
+     * @return Cell[]
+     */
+    public function getNeighbours()
+    {
+        return $this->neighbours;
+    }
+
+    /**
      * @param string $species
      * @return int
      */

@@ -16,7 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class RunCommand extends Command
 {
-    const CYCLES_PER_SECOND = 1;
+    const CYCLES_PER_SECOND = 3;
     const COMMAND_NAME = 'game:run';
     const INPUT_COMMAND_ARGUMENT = 'i';
     const OUTPUT_COMMAND_ARGUMENT = 'o';
