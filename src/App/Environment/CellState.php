@@ -1,12 +1,21 @@
 <?php
 namespace GameOfLife\Environment;
 
+use InvalidArgumentException;
+
 class CellState
 {
     const STAY_ALIVE = 1;
     const STAY_EMPTY = 2;
     const TERMINATED = 3;
     const ARISE = 4;
+
+    const ALLOWED_STATES = [
+        self::STAY_ALIVE,
+        self::STAY_EMPTY,
+        self::TERMINATED,
+        self::ARISE,
+    ];
 
     /**
      * @var int
@@ -24,6 +33,10 @@ class CellState
      */
     public function __construct(int $state, $newSpecies = null)
     {
+        if (!in_array($state, self::ALLOWED_STATES)) {
+            throw new InvalidArgumentException(sprintf('State: %d is not allowed.', $state));
+        }
+
         $this->state = $state;
         $this->newSpecies = $newSpecies;
     }

@@ -10,7 +10,7 @@ class CellNeighboursTest extends TestCase
     const AVAILABLE_SPECIES_1 = 'X';
     const AVAILABLE_SPECIES_2 = 'Y';
     const AVAILABLE_SPECIES_3 = 'Z';
-    
+
     /**
      * @dataProvider availableNeighboursSpeciesProvider
      *
@@ -133,7 +133,7 @@ class CellNeighboursTest extends TestCase
     public function neighboursSpeciesForRiseProvider(): array
     {
         return [
-            [
+            'one available species for rise' => [
                 'neighbours' => [
                     new Cell(0, 0, self::AVAILABLE_SPECIES_1),
                     new Cell(0, 1, self::AVAILABLE_SPECIES_1),
@@ -144,7 +144,7 @@ class CellNeighboursTest extends TestCase
                 ],
                 'expectedSpeciesForRise' => [self::AVAILABLE_SPECIES_1],
             ],
-            [
+            'two available species for rise' => [
                 'neighbours' => [
                     new Cell(0, 0, self::AVAILABLE_SPECIES_1),
                     new Cell(0, 1, self::AVAILABLE_SPECIES_1),
@@ -155,7 +155,7 @@ class CellNeighboursTest extends TestCase
                 ],
                 'expectedSpeciesForRise' => [self::AVAILABLE_SPECIES_1, self::AVAILABLE_SPECIES_2],
             ],
-            [
+            'no available species for rise' => [
                 'neighbours' => [
                     new Cell(0, 0, self::AVAILABLE_SPECIES_1),
                     new Cell(0, 1, self::AVAILABLE_SPECIES_2),
