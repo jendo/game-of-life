@@ -12,7 +12,7 @@ class OutputStyleFactory
      * @param OutputInterface $output
      * @return SymfonyStyle
      */
-    public function create(InputInterface $input, OutputInterface $output) : SymfonyStyle
+    public function create(InputInterface $input, OutputInterface $output): SymfonyStyle
     {
         return new SymfonyStyle($input, $output);
     }

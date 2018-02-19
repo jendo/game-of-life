@@ -3,12 +3,11 @@ namespace GameOfLife\Input;
 
 use GameOfLife\Environment\Cell;
 use GameOfLife\Environment\WorldState;
-use GameOfLife\Environment\WorldStateFactory;
-use GameOfLife\Input\Mapping\Life;
-use GameOfLife\Input\Mapping\Organism;
-use GameOfLife\Input\Mapping\Organisms;
-use GameOfLife\Input\Mapping\World;
 use GameOfLife\Exceptions\InvalidInputException;
+use GameOfLife\IO\Mapping\Life;
+use GameOfLife\IO\Mapping\Organism;
+use GameOfLife\IO\Mapping\Organisms;
+use GameOfLife\IO\Mapping\World;
 use Sabre\Xml\ParseException;
 use Sabre\Xml\Service;
 

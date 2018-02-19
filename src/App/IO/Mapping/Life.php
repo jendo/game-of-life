@@ -1,5 +1,5 @@
 <?php
-namespace GameOfLife\Input\Mapping;
+namespace GameOfLife\IO\Mapping;
 
 class Life
 {

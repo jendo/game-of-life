@@ -3,12 +3,12 @@ namespace GameOfLife\Output;
 
 use GameOfLife\Environment\WorldState;
 use GameOfLife\Exceptions\InvalidOutputException;
-use GameOfLife\Input\Mapping\Life;
-use GameOfLife\Input\Mapping\Organism;
-use GameOfLife\Input\Mapping\Organisms;
+use GameOfLife\IO\Mapping\Life;
+use GameOfLife\IO\Mapping\Organism;
+use GameOfLife\IO\Mapping\Organisms;
 use InvalidArgumentException;
 use Sabre\Xml\Service;
-use GameOfLife\Input\Mapping\World as MappingWorld;
+use GameOfLife\IO\Mapping\World as MappingWorld;
 
 class XmlFileWriter
 {
