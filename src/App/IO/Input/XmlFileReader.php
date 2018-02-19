@@ -1,5 +1,5 @@
 <?php
-namespace GameOfLife\Input;
+namespace GameOfLife\IO\Input;
 
 use GameOfLife\Environment\Cell;
 use GameOfLife\Environment\WorldState;
@@ -13,7 +13,6 @@ use Sabre\Xml\Service;
 
 class XmlFileReader
 {
-
     /**
      * @var string path of xml file to read from
      */

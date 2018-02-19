@@ -4,9 +4,9 @@ parameters:
 services:
     application: GameOfLife\Application
     - GameOfLife\Command\RunCommand
-    - GameOfLife\Input\XmlFileReaderFactory
-    - GameOfLife\Output\XmlFileWriterFactory
-    - GameOfLife\Output\OutputStyleFactory
+    - GameOfLife\IO\Input\XmlFileReaderFactory
+    - GameOfLife\IO\Output\XmlFileWriterFactory
+    - GameOfLife\IO\Output\OutputStyleFactory
     - GameOfLife\Helper\WorldFormatter
     - GameOfLife\Environment\NeighboursFactory
     - GameOfLife\Environment\WorldFactory

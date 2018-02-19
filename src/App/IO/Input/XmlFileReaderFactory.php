@@ -1,5 +1,5 @@
 <?php
-namespace GameOfLife\Input;
+namespace GameOfLife\IO\Input;
 
 use Sabre\Xml\Service;
 
