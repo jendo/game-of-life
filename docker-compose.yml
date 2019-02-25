@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+
+  php:
+    build: ./docker/php
+    volumes:
+      - .:/var/www/game_of_life
