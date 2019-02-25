@@ -6,7 +6,7 @@ if (php_sapi_name() !== "cli") {
 }
 
 /** @var Container $container */
-$container = require __DIR__ . '/src/bootstrap.php';
+$container = require __DIR__ . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 /** @var GameOfLife\Application $application */
 $application = $container->getService('application');

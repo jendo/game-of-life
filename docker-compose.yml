@@ -5,4 +5,4 @@ services:
   php:
     build: ./docker/php
     volumes:
-      - .:/var/www/game_of_life
+      - ./src:/var/www/game_of_life
