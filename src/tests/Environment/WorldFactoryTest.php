@@ -6,7 +6,6 @@ use GameOfLife\Environment\World;
 use GameOfLife\Environment\WorldFactory;
 use GameOfLife\Environment\WorldState;
 use Mockery;
-use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class WorldFactoryTest extends TestCase
@@ -20,20 +19,22 @@ class WorldFactoryTest extends TestCase
     }
 
     /**
-     * @return WorldState|MockInterface
+     * @return WorldState
      */
     private function createWordStateMock(): WorldState
     {
+        /** @var WorldState $mock */
         $mock = Mockery::mock(WorldState::class);
 
         return $mock;
     }
 
     /**
-     * @return NeighboursFactory|MockInterface
+     * @return NeighboursFactory
      */
     private function createNeighboursFactoryMock(): NeighboursFactory
     {
+        /** @var NeighboursFactory $mock */
         $mock = Mockery::mock(NeighboursFactory::class);
 
         return $mock;

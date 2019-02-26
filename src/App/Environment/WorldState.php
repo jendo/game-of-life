@@ -34,7 +34,7 @@ class WorldState
      * @param int $iterations
      * @param int $size
      * @param int $species
-     * @param Cell[] $cells
+     * @param Cell[][] $cells
      */
     public function __construct(int $iterations, int $size, int $species, array $cells)
     {
@@ -53,7 +53,7 @@ class WorldState
     }
 
     /**
-     * @return Cell[]
+     * @return Cell[][]
      */
     public function getCells(): array
     {
