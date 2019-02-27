@@ -4,20 +4,17 @@ PHP implementation of [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Ga
 
 This implementation is able to work with more than one speices of organism.
 
-Application read initial word state from XML file defined as 1st parameter in run commnad. After iterations, the state of the world will be saved in an XML file defined as 2nd parameter in run commnad of application.
+Application read initial word state from XML file defined as 1st parameter in run commnad. After iterations, the state of the world will be saved in an XML file defined as 2nd parameter.
 
 ## How to run application
 
-Clone the repo and install dependencies via composer: ```composer install```  
-
-In console run this commnad:
-
-```
-php index.php game:run <input.xml> <output.xml>
-```
-
-First parameter is required.
-Second parameter is optional, default values is ```output.xml```
+1. Clone the repo 
+2. Start docker: ```docker-compose up -d```
+3. Go to docker php container 
+4. Install dependencies via composer: ```composer install --no-dev```
+5. Run the game: ```php index.php game:run <input.xml> <output.xml>```
+    * first parameter is required
+    * second parameter is optional, default values is ```output.xml```
 
 ## Sample input
 ```xml
@@ -53,5 +50,15 @@ Second parameter is optional, default values is ```output.xml```
 Tests are written in [PHPUNIT package from Sebastian Bergmann](https://packagist.org/packages/phpunit/phpunit)
 
 ```
-./vendor/bin/phpunit -c phpunit.xml 
+composer tests 
 ```
+
+## Static Analysis 
+Source code is fully valid with max level of PHPSTAN
+
+
+```
+composer phpstan 
+```
+
+
