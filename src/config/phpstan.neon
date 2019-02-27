@@ -1,0 +1,3 @@
+parameters:
+    ignoreErrors:
+        - '#Result of method Sabre\\Xml\\Service::writeValueObject\(\) \(void\) is used\.#'

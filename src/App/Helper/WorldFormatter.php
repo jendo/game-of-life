@@ -28,11 +28,7 @@ class WorldFormatter
         return array_reverse($cellArray);
     }
 
-    /**
-     * @param Cell $cell
-     * @return string
-     */
-    private function getCellTablePresentation(Cell $cell): string
+    private function getCellTablePresentation(Cell $cell): ?string
     {
         return $cell->isAlive() ? $cell->getSpecies() : self::EMPTY_CELL;
     }

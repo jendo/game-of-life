@@ -31,6 +31,7 @@
     }
   },
   "scripts": {
-    "tests": "./vendor/bin/phpunit -c phpunit.xml"
+    "tests": "./vendor/bin/phpunit -c phpunit.xml",
+    "phpstan": "./vendor/bin/phpstan analyse App tests --level max -c config/phpstan.neon"
   }
 }

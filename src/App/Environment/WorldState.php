@@ -5,7 +5,7 @@ namespace GameOfLife\Environment;
 class WorldState
 {
     /**
-     * @var Cell[]
+     * @var Cell[][]
      */
     private $cells;
 
@@ -93,7 +93,7 @@ class WorldState
     }
 
     /**
-     * @param Cell[] $newGeneration
+     * @param Cell[][] $newGeneration
      * @return WorldState
      */
     public function getNewStateWithNewGeneration(array $newGeneration): WorldState

@@ -37,7 +37,7 @@ class CellNeighbours
      * @param string $species
      * @return int
      */
-    public function getSpeciesCount(string $species): int
+    public function getSpeciesCount(?string $species): int
     {
         return isset($this->availableSpeciesCounts[$species]) ? $this->availableSpeciesCounts[$species] : 0;
     }

@@ -7,7 +7,7 @@ use Symfony\Component\Console\Application as ConsoleApplication;
 class Application
 {
     /**
-     * @var Application
+     * @var ConsoleApplication
      */
     private $symfonyConsoleApplication;
 

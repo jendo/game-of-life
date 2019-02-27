@@ -47,8 +47,9 @@ class XmlFileReader
         return $worldState;
     }
 
-    /*
+    /**
      * @return string
+     * @throws InvalidInputException
      */
     private function loadFile(): string
     {
@@ -86,6 +87,7 @@ class XmlFileReader
         $this->mapXmlElements();
 
         try {
+            /** @var Life $life */
             $life = $this->xmlService->parse($input);
         } catch (ParseException $e) {
             throw new InvalidInputException(sprintf("Can not parse xml content from file '%s'.", $this->filePath));

@@ -14,16 +14,11 @@ class Cell
     private $posY;
 
     /**
-     * @var null
+     * @var string|null
      */
     private $species;
 
-    /**
-     * @param int $posX
-     * @param int $posY
-     * @param null|string $species
-     */
-    public function __construct(int $posX, int $posY, string $species = null)
+    public function __construct(int $posX, int $posY, ?string $species = null)
     {
         $this->posX = $posX;
         $this->posY = $posY;
@@ -103,10 +98,10 @@ class Cell
     }
 
     /**
-     * @param $countNeighboursOfSameSpecies
+     * @param int $countNeighboursOfSameSpecies
      * @return CellState
      */
-    private function getLiveCellNewState($countNeighboursOfSameSpecies): CellState
+    private function getLiveCellNewState(int $countNeighboursOfSameSpecies): CellState
     {
         if ($countNeighboursOfSameSpecies === 2 || $countNeighboursOfSameSpecies === 3) {
             return new CellState(CellState::STAY_ALIVE);
@@ -128,12 +123,8 @@ class Cell
         return new CellState(CellState::STAY_EMPTY);
     }
 
-    /**
-     * @param array $availableSpeciesForRise
-     * @return mixed
-     */
-    private function getSpeciesForNewOrganismInCell(array $availableSpeciesForRise)
+    private function getSpeciesForNewOrganismInCell(array $availableSpeciesForRise): ?string
     {
-        return $availableSpeciesForRise[array_rand($availableSpeciesForRise, 1)];
+        return $availableSpeciesForRise[array_rand($availableSpeciesForRise)];
     }
 }
