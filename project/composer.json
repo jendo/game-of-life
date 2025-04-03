@@ -10,7 +10,8 @@
   "type": "project",
   "license": "MIT",
   "require": {
-    "php": ">=8.1"
+    "php": ">=8.1",
+    "symfony/console": "^6.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^2",
