@@ -1,0 +1,25 @@
+{
+  "name": "jendo/game-of-life",
+  "description": "Game of Life",
+  "authors": [
+    {
+      "name": "Michal Jenis",
+      "email": "jenis.michal@gmail.com"
+    }
+  ],
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src"
+    }
+  },
+  "minimum-stability": "stable",
+  "config": {
+    "bin-dir": "bin",
+    "sort-packages": true
+  }
+}
