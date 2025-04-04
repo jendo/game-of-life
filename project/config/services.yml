@@ -1,2 +1,4 @@
 services:
 
+    Symfony\Component\Console\Application:
+        public: true

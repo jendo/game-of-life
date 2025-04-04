@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use App\AppKernel;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-$consoleApplication = new Application();
+$kernel = new AppKernel('dev', true);
+$kernel->boot();
+
+$container = $kernel->getContainer();
+/** @var Application $consoleApplication */
+$consoleApplication = $container->get(Application::class);
 
 try {
     $consoleApplication->run();
