@@ -12,12 +12,18 @@
   "require": {
     "php": ">=8.1"
   },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3"
+  },
   "autoload": {
     "psr-4": {
       "App\\": "src"
     }
   },
   "minimum-stability": "stable",
+  "scripts": {
+    "phpcs": "php -d memory_limit=512M bin/phpcs --parallel=8 --colors --standard=PSR12 --extensions=php --encoding=utf-8 -s -p -n src"
+  },
   "config": {
     "bin-dir": "bin",
     "sort-packages": true
