@@ -14,9 +14,19 @@ if (getenv('TZ') === false) {
     exit(1);
 }
 
-AppKernel::initGlobalState((string) getenv('TZ'), true);
+if (getenv('APP_ENV') === false) {
+    error_log('APP_ENV is not set');
+    exit(1);
+}
 
-$kernel = new AppKernel('dev', true);
+if (getenv('APP_DEBUG') === false) {
+    error_log('APP_DEBUG is not set');
+    exit(1);
+}
+
+AppKernel::initGlobalState((string) getenv('TZ'), (bool) getenv('APP_DEBUG'));
+
+$kernel = new AppKernel((string) getenv('APP_ENV'), (bool) getenv('APP_DEBUG'));
 $kernel->boot();
 
 $container = $kernel->getContainer();
