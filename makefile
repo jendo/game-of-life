@@ -43,3 +43,7 @@ phpunit:
 phpstan:
 	@echo "${GREEN}>>> Running phpcs${EOL}"
 	@$(PHP_DOCKER_EXEC) composer phpstan
+
+clear-cache:
+	@echo "${BLUE}>>> Reset symfony cache ${EOL}"
+	@$(PHP_DOCKER_EXEC) rm -rf var/cache/*

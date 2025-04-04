@@ -2,5 +2,7 @@
 data/db/*
 !project/bin/console
 project/bin/*
+project/var/cache/*
+project/var/log/*
 project/vendor/*
 !.gitkeep
