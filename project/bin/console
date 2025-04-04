@@ -16,7 +16,12 @@ if (getenv('TZ') === false) {
 
 AppKernel::initGlobalState((string) getenv('TZ'), true);
 
-$consoleApplication = new Application();
+$kernel = new AppKernel('dev', true);
+$kernel->boot();
+
+$container = $kernel->getContainer();
+/** @var Application $consoleApplication */
+$consoleApplication = $container->get(Application::class);
 
 try {
     $consoleApplication->run();

@@ -5,3 +5,6 @@ services:
 
     App\:
         resource: '../src'
+
+    Symfony\Component\Console\Application:
+        public: true
