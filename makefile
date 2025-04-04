@@ -31,3 +31,7 @@ composer-install:
 composer-dump-autoload:
 	@echo "${GREEN}>>> Running composer dump-autoload${EOL}"
 	@$(PHP_DOCKER_EXEC) composer dump-autoload
+
+phpcs:
+	@echo "${GREEN}>>> Running phpcs${EOL}"
+	@$(PHP_DOCKER_EXEC) composer phpcs
