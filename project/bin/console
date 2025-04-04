@@ -8,7 +8,17 @@ use App\AppKernel;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-$kernel = new AppKernel('dev', true);
+if (getenv('APP_ENV') === false) {
+    error_log('APP_ENV is not set');
+    exit(1);
+}
+
+if (getenv('APP_DEBUG') === false) {
+    error_log('APP_DEBUG is not set');
+    exit(1);
+}
+
+$kernel = new AppKernel(getenv('APP_ENV'), (bool) getenv('APP_DEBUG'));
 $kernel->boot();
 
 $container = $kernel->getContainer();
