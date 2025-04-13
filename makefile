@@ -52,3 +52,7 @@ phpcs:
 phpunit:
 	@echo "${GREEN}>>> Running phpcs${EOL}"
 	@$(PHP_DOCKER_EXEC) composer phpunit
+
+phpstan:
+	@echo "${GREEN}>>> Running phpcs${EOL}"
+	@$(PHP_DOCKER_EXEC) composer phpstan
