@@ -6,7 +6,6 @@ declare(strict_types=1);
 require __DIR__ . '/../vendor/autoload.php';
 
 use App\AppKernel;
-use App\Command\GamePlayCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -33,10 +32,6 @@ $kernel->boot();
 $container = $kernel->getContainer();
 /** @var Application $consoleApplication */
 $consoleApplication = $container->get(Application::class);
-
-/** @var GamePlayCommand $gamePlayCommand */
-$gamePlayCommand = $container->get(GamePlayCommand::class);
-$consoleApplication->add($gamePlayCommand);
 
 try {
     $consoleApplication->run();

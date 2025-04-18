@@ -9,6 +9,3 @@ services:
 
     Symfony\Component\Console\Application:
         public: true
-
-    App\Command\GamePlayCommand:
-        public: true
