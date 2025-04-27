@@ -9,3 +9,14 @@ services:
 
     Symfony\Component\Console\Application:
         public: true
+
+    Symfony\Component\Serializer\Serializer:
+        arguments:
+            $normalizers:
+                - '@App\Serializer\Normalizer\LifeNormalizer'
+            $encoders:
+                - '@Symfony\Component\Serializer\Encoder\XmlEncoder'
+
+    Symfony\Component\Serializer\Encoder\XmlEncoder: ~
+
+    Symfony\Component\Serializer\SerializerInterface: '@Symfony\Component\Serializer\Serializer'
