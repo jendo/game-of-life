@@ -7,11 +7,14 @@ namespace App\Command;
 use App\File\FileNotExistException;
 use App\File\FileNotReadableException;
 use App\File\Loader;
+use App\Game\Input\LifeInputProcessor;
+use App\Game\Input\Validation\InvalidStateException;
 use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException as SerializerInvalidArgumentException;
 
 final class GamePlayCommand extends Command
 {
@@ -20,11 +23,15 @@ final class GamePlayCommand extends Command
 
     private Loader $fileLoader;
 
+    private LifeInputProcessor $lifeInputProcessor;
+
     public function __construct(
-        Loader $fileLoader
+        Loader $fileLoader,
+        LifeInputProcessor $lifeInputProcessor
     ) {
         parent::__construct();
         $this->fileLoader = $fileLoader;
+        $this->lifeInputProcessor = $lifeInputProcessor;
     }
 
     protected function configure(): void
@@ -49,6 +56,19 @@ final class GamePlayCommand extends Command
             $content = $this->fileLoader->load($inputXml);
         } catch (FileNotExistException | FileNotReadableException $e) {
             $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
+            return -1;
+        }
+
+        try {
+            $life = $this->lifeInputProcessor->process($content);
+        } catch (SerializerInvalidArgumentException | InvalidArgumentException $e) {
+            $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
+            return -1;
+        } catch (InvalidStateException $e) {
+            foreach ($e->getErrors() as $error) {
+                $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
+            }
+
             return -1;
         }
 
