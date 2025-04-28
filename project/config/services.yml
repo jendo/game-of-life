@@ -21,3 +21,14 @@ services:
     App\Serializer\Normalizer\LifeNormalizer: ~
 
     Symfony\Component\Serializer\SerializerInterface: '@Symfony\Component\Serializer\Serializer'
+
+    Symfony\Component\Console\Style\SymfonyStyle:
+        arguments:
+            $input: '@Symfony\Component\Console\Input\InputInterface'
+            $output: '@Symfony\Component\Console\Output\OutputInterface'
+
+    Symfony\Component\Console\Input\ArgvInput: ~
+    Symfony\Component\Console\Output\ConsoleOutput: ~
+
+    Symfony\Component\Console\Input\InputInterface: '@Symfony\Component\Console\Input\ArgvInput'
+    Symfony\Component\Console\Output\OutputInterface: '@Symfony\Component\Console\Output\ConsoleOutput'
