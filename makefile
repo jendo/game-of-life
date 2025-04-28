@@ -47,3 +47,6 @@ phpstan:
 clear-cache:
 	@echo "${BLUE}>>> Reset symfony cache ${EOL}"
 	@$(PHP_DOCKER_EXEC) rm -rf var/cache/*
+
+play:
+	$(PHP_DOCKER_EXEC) bin/console game:play $(input)
