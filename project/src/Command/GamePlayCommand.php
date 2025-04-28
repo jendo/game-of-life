@@ -7,6 +7,7 @@ namespace App\Command;
 use App\File\FileNotExistException;
 use App\File\FileNotReadableException;
 use App\File\Loader;
+use App\Game\Environment\WorldEvolution;
 use App\Game\Input\LifeInputProcessor;
 use App\Game\Input\Validation\InvalidStateException;
 use InvalidArgumentException;
@@ -25,13 +26,17 @@ final class GamePlayCommand extends Command
 
     private LifeInputProcessor $lifeInputProcessor;
 
+    private WorldEvolution $worldEvolution;
+
     public function __construct(
         Loader $fileLoader,
-        LifeInputProcessor $lifeInputProcessor
+        LifeInputProcessor $lifeInputProcessor,
+        WorldEvolution $worldEvolution
     ) {
         parent::__construct();
         $this->fileLoader = $fileLoader;
         $this->lifeInputProcessor = $lifeInputProcessor;
+        $this->worldEvolution = $worldEvolution;
     }
 
     protected function configure(): void
@@ -71,6 +76,8 @@ final class GamePlayCommand extends Command
 
             return -1;
         }
+
+        $wordStates = $this->worldEvolution->start($life);
 
         return 0;
     }
