@@ -10,17 +10,20 @@ use App\File\Loader;
 use App\Game\Environment\WorldEvolution;
 use App\Game\Input\LifeInputProcessor;
 use App\Game\Input\Validation\InvalidStateException;
+use App\Game\Output\WorldStateRenderer;
 use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException as SerializerInvalidArgumentException;
 
 final class GamePlayCommand extends Command
 {
     private const INPUT_ARG = 'i';
     private const OUTPUT_ARG = 'o';
+    private const CYCLES_PER_SECOND = 3;
 
     private Loader $fileLoader;
 
@@ -28,15 +31,23 @@ final class GamePlayCommand extends Command
 
     private WorldEvolution $worldEvolution;
 
+    private WorldStateRenderer $worldStateRenderer;
+
+    private SymfonyStyle $symfonyStyle;
+
     public function __construct(
         Loader $fileLoader,
         LifeInputProcessor $lifeInputProcessor,
-        WorldEvolution $worldEvolution
+        WorldEvolution $worldEvolution,
+        WorldStateRenderer $worldStateRenderer,
+        SymfonyStyle $symfonyStyle
     ) {
         parent::__construct();
         $this->fileLoader = $fileLoader;
         $this->lifeInputProcessor = $lifeInputProcessor;
         $this->worldEvolution = $worldEvolution;
+        $this->worldStateRenderer = $worldStateRenderer;
+        $this->symfonyStyle = $symfonyStyle;
     }
 
     protected function configure(): void
@@ -79,6 +90,13 @@ final class GamePlayCommand extends Command
 
         $wordStates = $this->worldEvolution->start($life);
 
+        foreach ($wordStates as $worldState) {
+            $this->clearOutput($output);
+            $data = $this->worldStateRenderer->render($worldState);
+            $this->symfonyStyle->table([], $data);
+            $this->sleep();
+        }
+
         return 0;
     }
 
@@ -101,5 +119,21 @@ final class GamePlayCommand extends Command
         }
 
         return $inputXml;
+    }
+
+    /**
+     * @param OutputInterface $output
+     */
+    private function clearOutput(OutputInterface $output): void
+    {
+        $output->write("\033\143");
+    }
+
+    /**
+     * @return void
+     */
+    private function sleep(): void
+    {
+        usleep((int) floor(1000000 / self::CYCLES_PER_SECOND));
     }
 }
