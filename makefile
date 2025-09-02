@@ -60,3 +60,12 @@ phpstan:
 clear-cache:
 	@echo "${BLUE}>>> Reset symfony cache ${EOL}"
 	@$(PHP_DOCKER_EXEC) rm -rf var/cache/*
+
+setup:
+	@echo "${GREEN}>>> Setting up the project...${EOL}"
+	@${MAKE} up
+	@${MAKE} composer-install
+	@echo "${GREEN}>>> Setup is complete!${EOL}"
+
+play:
+	$(PHP_DOCKER_EXEC) bin/console game:play ${input} ${output}
